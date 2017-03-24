@@ -20,10 +20,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 public class Player extends AnimalObject {
@@ -145,11 +142,19 @@ public class Player extends AnimalObject {
 		session.sendPacket(new ServerPacket(this.inGameId, Protocol.SM_NOWDEATH, this.currMapPoint.x, this.currMapPoint.y, (short) direction.ordinal()));
 	}
 
-	public boolean hit(Direction direction, int magicId) {
+	public boolean hit(Direction direction, int magicId){
+		return hit(direction,magicId,1);
+	}
+
+	public boolean hit(Direction direction, int magicId,int maxDistance) {
 
 		MapEngine.MapInfo mapInfo = MapEngine.getMapInfo(this.currMapPoint.mapId);
 		int               power   = getPower();
-		List<BaseObject>  targets = mapInfo.getObjectsOnLine(this.currMapPoint, direction, 1, 1);
+
+		List<BaseObject>  targets = new ArrayList<>();
+		for (int i = 1; i <= maxDistance; i++) {
+			targets.addAll(mapInfo.getObjectsOnLine(this.currMapPoint, direction, i, 1));
+		}
 
 		PlayerMagic playerMagic = magics.get(magicId);
 		if (playerMagic != null) {

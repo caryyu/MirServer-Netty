@@ -35,6 +35,11 @@ public class PacketDispatcher extends ChannelHandlerAdapter {
 	public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
 		//TODO 这里不是很清楚到底 使用哪个事件来处理 '连接' 和 '断开', 在哪里加入session, 哪里移出session比较合适 ?
 		super.channelUnregistered(ctx);
+	}
+
+	@Override
+	public void disconnect(ChannelHandlerContext ctx, ChannelPromise promise) throws Exception {
+		super.disconnect(ctx, promise);
 		Class<? extends Handler> handlerClass = (Class<? extends Handler>) Class.forName(handlerPackageName + ".DisconnectHandler");
 		Handler handler = handlerClass.newInstance();
 		handler.onDisconnect(ctx);

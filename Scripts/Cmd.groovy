@@ -16,5 +16,19 @@ void move(Player player, List<String> args) {
     } else if (args.size() == 1) {
         player.enterMap(args[0]);
     }
+}
 
+void make(Player player, List<String> args) {
+    if (args != null) {
+        for (item in args) {
+            player.takeNewItem(item);
+        }
+    }
+}
+
+void levelUp(Player player, List<String> args) {
+    if (args != null) {
+        int l = Integer.parseInt(args[0]);
+        player.levelUp(l);
+    }
 }

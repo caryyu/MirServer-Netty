@@ -33,7 +33,7 @@ public class ActionHandler extends PlayerHandler {
 				player.session.sendPacket(new GameServerPackets.Turn(player));
 				break;
 			case CM_LONGHIT: // TODO: 16/3/13 外挂的自动刺杀不会"开启刺杀", 只会使用 CM_LONGHIT 的 Hit,
-				isSucc = player.hit(request.direction, 12);
+				isSucc = player.hit(request.direction, 12, 2);
 				break;
 			case CM_FIREHIT: // TODO: 16/3/13 外挂会自动用Spell来"开启烈火", 使用烈火的时候发 CM_FIREHIT 的Hit
 				isSucc = player.hit(request.direction, 26);

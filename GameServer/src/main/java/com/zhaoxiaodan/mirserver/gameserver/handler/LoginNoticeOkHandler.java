@@ -11,6 +11,9 @@ import com.zhaoxiaodan.mirserver.network.packets.ClientPacket;
 import com.zhaoxiaodan.mirserver.network.packets.ServerPacket;
 import com.zhaoxiaodan.mirserver.utils.NumUtil;
 
+/**
+ * 点击公告进来后的处理类
+ */
 public class LoginNoticeOkHandler extends PlayerHandler {
 
 	@Override
